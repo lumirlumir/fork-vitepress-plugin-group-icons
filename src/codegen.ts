@@ -30,6 +30,10 @@ export async function generateCSS(labels: Set<string>, options: Options) {
   box-shadow: inset 0 -1px var(--vp-code-tab-divider);
 }
 
+.custom-block .vp-code-block-title-bar {
+  margin: 16px 0 0 0;
+}
+
 @media (min-width: 640px) {
   .vp-code-block-title-bar {
     margin: 16px 0 0 0;
