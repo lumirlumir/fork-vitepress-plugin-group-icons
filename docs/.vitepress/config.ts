@@ -13,6 +13,7 @@ export default defineConfig({
     ],
     nav: [
       { text: 'Features', link: '/features' },
+      { text: 'Showcase', link: '/showcase' },
     ],
     sidebar: [
       {
@@ -21,6 +22,10 @@ export default defineConfig({
           { text: 'Getting Started', link: '/getting-started' },
           { text: 'Features', link: '/features' },
         ],
+      },
+      {
+        text: 'Showcase',
+        link: '/showcase',
       },
     ],
 
