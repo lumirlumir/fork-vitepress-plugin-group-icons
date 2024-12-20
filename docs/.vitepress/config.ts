@@ -32,7 +32,11 @@ export default defineConfig({
   },
   markdown: {
     config(md) {
-      md.use(groupIconMdPlugin)
+      md.use(groupIconMdPlugin, {
+        titleBar: {
+          includeSnippet: true,
+        },
+      })
     },
     codeTransformers: [
       transformerTwoslash(),

@@ -86,6 +86,23 @@ export default defineConfig({
 })
 ```
 
+### Includes Code Snippets
+
+If you also want to add title bar for [Code Snippets
+](https://vitepress.dev/guide/markdown#import-code-snippets):
+
+```ts {5} [.vitepress/config.ts]
+export default defineConfig({
+  markdown: {
+    config(md) {
+      md.use(groupIconMdPlugin, {
+        titleBar: { includeSnippet: true },
+      })
+    },
+  },
+})
+```
+
 ## Built-in Icons
 
 ### Package Managers

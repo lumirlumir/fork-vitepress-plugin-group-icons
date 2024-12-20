@@ -1,6 +1,19 @@
 import type Markdown from 'markdown-it'
 
-export function groupIconMdPlugin(md: Markdown) {
+interface MdPluginOptions {
+  titleBar: {
+    /**
+     * Whether the title bar is included in the [Snippets](https://vitepress.dev/guide/markdown#import-code-snippets)
+     *
+     * @defaultValue false
+     */
+    includeSnippet?: boolean
+  }
+}
+
+export function groupIconMdPlugin(md: Markdown, options?: MdPluginOptions) {
+  const _options = options || { titleBar: { includeSnippet: false } }
+
   // code group rule
   const labelRE = /<label\b(?![^>]+\bdata-title\b)[^>]*>(.*?)<\/label>/g
   const codeGroupOpenRule = md.renderer.rules['container_code-group_open']
@@ -34,8 +47,10 @@ export function groupIconMdPlugin(md: Markdown) {
       }
       const title = token.info.match(/\[(.*?)\]/)
 
+      const isIncludedSnippet = _options.titleBar.includeSnippet
+
       // only render code block not in code-group
-      if (!isOnCodeGroup && title) {
+      if (!isOnCodeGroup && title && (!(token as any).src || isIncludedSnippet)) {
         return `<div class="vp-code-block-title">
       <div class="vp-code-block-title-bar">
           <span class="vp-code-block-title-text" data-title="${md.utils.escapeHtml(title[1])}">${title[1]}</span>
