@@ -1,10 +1,15 @@
 import type { Plugin, ViteDevServer } from 'vite'
+import { createFilter } from 'vite'
 import { generateCSS } from './codegen'
 import { isSetEqual } from './utils'
 
 export interface Options {
   customIcon: Record<string, string>
 }
+
+const filter = createFilter(
+  [/\.md$/, /\.md\?vue/, /\.md\?v=/],
+)
 
 export function groupIconVitePlugin(options?: Options): Plugin {
   const virtualCssId = 'virtual:group-icons.css'
@@ -49,7 +54,7 @@ export function groupIconVitePlugin(options?: Options): Plugin {
       return undefined
     },
     transform(code, id) {
-      if (!id.endsWith('.md'))
+      if (!filter(id))
         return
 
       while (true) {
