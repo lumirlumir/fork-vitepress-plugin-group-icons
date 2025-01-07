@@ -16,9 +16,11 @@ describe('generate css', () => {
       customIcon: {
         ae: 'logos:adobe-after-effects',
         vitepress: localIconLoader(import.meta.url, '../docs/assets/vitepress.svg'),
-        oxc: 'https://cdn.jsdelivr.net/gh/oxc-project/oxc-assets/round.svg',
+        oxc: 'https://vp.yuy1n.io/oxc.svg',
       },
     })).toMatchSnapshot()
+  }, {
+    timeout: 10000,
   })
 
   it('duplicate label', async () => {
