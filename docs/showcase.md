@@ -4,6 +4,7 @@ This plugin is used in the following projects:
 (no particular order)
 
 - [Vite](https://vite.dev/guide/#scaffolding-your-first-vite-project)
+- [VitePress](https://vitepress.dev/guide/getting-started#prerequisites)
 - [UnoCSS](https://unocss.dev/guide/style-reset#installation)
 - [Unplugin](https://unplugin.unjs.io/guide/#install-package)
 - [Vitest](https://main.vitest.dev/guide/#adding-vitest-to-your-project)
