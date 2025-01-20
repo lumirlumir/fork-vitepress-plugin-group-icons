@@ -60,7 +60,7 @@ export default defineConfig({
           '.mdx': 'vscode-icons:file-type-light-mdx',
           'babel': 'vscode-icons:file-type-light-babel2',
           'vitepress': localIconLoader(import.meta.url, '../assets/vitepress.svg'),
-          'oxc': 'https://cdn.jsdelivr.net/gh/oxc-project/oxc-assets/round.svg',
+          'unplugin': 'https://unplugin.unjs.io/logo_light.svg',
         },
       }),
       Inspect(),

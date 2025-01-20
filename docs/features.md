@@ -202,6 +202,9 @@ export default defineConfig({
 ``` [uno.config.ts]
 ```
 
+``` [.oxlintrc.json]
+```
+
 :::
 
 ### Filename Extension
@@ -245,7 +248,7 @@ export default defineConfig({
 
 ## Custom Icons
 
-> You can add any icons from [iconify](https://icon-sets.iconify.design/) or local svg file.
+> You can add any icons from [iconify](https://icon-sets.iconify.design/), local svg file or url.
 
 ```ts {2,13-19} [.vitepress/config.ts]
 import { defineConfig } from 'vitepress'
@@ -264,7 +267,7 @@ export default defineConfig({
           '.mdx': 'vscode-icons:file-type-light-mdx',
           'babel': 'vscode-icons:file-type-babel',
           'vitepress': localIconLoader(import.meta.url, '../assets/vitepress.svg'),
-          'oxc': 'https://cdn.jsdelivr.net/gh/oxc-project/oxc-assets/round.svg',
+          'unplugin': 'https://unplugin.unjs.io/logo_light.svg',
         },
       })
     ],
@@ -283,7 +286,7 @@ export default defineConfig({
 ``` [Vitepress]
 ```
 
-``` [oxc]
+``` [Unplugin]
 ```
 
 :::
