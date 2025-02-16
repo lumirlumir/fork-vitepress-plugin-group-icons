@@ -85,7 +85,7 @@ ${selector} {
 }`
   }))
 
-  return iconCSS.join('')
+  return iconCSS.sort().join('')
 }
 
 async function getSVG(icon: string) {
