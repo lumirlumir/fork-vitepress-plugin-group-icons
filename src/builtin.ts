@@ -38,7 +38,7 @@ export const builtinIcons = {
   '.oxlintrc': 'vscode-icons:file-type-oxlint',
   // filename extensions
   '.mts': 'vscode-icons:file-type-typescript',
-  '.cts': 'vscode-icons:file-type-typescript',  
+  '.cts': 'vscode-icons:file-type-typescript',
   '.ts': 'vscode-icons:file-type-typescript',
   '.tsx': 'vscode-icons:file-type-typescript',
   '.mjs': 'vscode-icons:file-type-js',
