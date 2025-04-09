@@ -70,19 +70,19 @@ export default Theme
 ::: code-group
 
 ```sh [npm]
-npm install vitepress-plugin-group-icons
+npm install -D vitepress-plugin-group-icons
 ```
 
 ```sh [yarn]
-yarn add vitepress-plugin-group-icons
+yarn add -D vitepress-plugin-group-icons
 ```
 
 ```sh [pnpm]
-pnpm add vitepress-plugin-group-icons
+pnpm add -D vitepress-plugin-group-icons
 ```
 
 ```sh [bun]
-bun add vitepress-plugin-group-icons
+bun add -D vitepress-plugin-group-icons
 ```
 
 :::

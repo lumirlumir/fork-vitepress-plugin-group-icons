@@ -17,7 +17,7 @@ pnpm add -D vitepress-plugin-group-icons
 ```
 
 ```sh [bun]
-bun vitepress-plugin-group-icons -d
+bun add -D vitepress-plugin-group-icons
 ```
 
 :::
