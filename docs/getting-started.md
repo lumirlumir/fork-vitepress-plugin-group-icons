@@ -5,19 +5,19 @@
 ::: code-group
 
 ```sh [npm]
-npm install vitepress-plugin-group-icons -D
+npm install vitepress-plugin-group-icons
 ```
 
 ```sh [yarn]
-yarn add vitepress-plugin-group-icons -D
+yarn add vitepress-plugin-group-icons
 ```
 
 ```sh [pnpm]
-pnpm add -D vitepress-plugin-group-icons
+pnpm add vitepress-plugin-group-icons
 ```
 
 ```sh [bun]
-bun add -D vitepress-plugin-group-icons
+bun add vitepress-plugin-group-icons
 ```
 
 :::
