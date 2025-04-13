@@ -4,7 +4,7 @@ import { generateCSS } from './codegen'
 import { isSetEqual } from './utils'
 
 export interface Options {
-  customIcon: Record<string, string>
+  customIcon?: Record<string, string>
   defaultLabels?: string[]
 }
 
