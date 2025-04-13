@@ -290,3 +290,35 @@ export default defineConfig({
 ```
 
 :::
+
+## Default Labels
+
+> Force specific icons to be loaded regardless of whether they appear in your documentation.
+
+The defaultLabels option allows you to preload icons for specific labels, ensuring they're available in your CSS even if they don't appear in your current documentation pages.
+
+```ts {2,13-19} [.vitepress/config.ts]
+import { defineConfig } from 'vitepress'
+import { groupIconMdPlugin, groupIconVitePlugin } from 'vitepress-plugin-group-icons'
+
+export default defineConfig({
+  markdown: {
+    config(md) {
+      md.use(groupIconMdPlugin)
+    },
+  },
+  vite: {
+    plugins: [
+      groupIconVitePlugin({
+        defaultLabels: [
+          'npm',
+          'yarn',
+          'pnpm',
+          'bun',
+          'deno',
+        ],
+      })
+    ],
+  }
+})
+```

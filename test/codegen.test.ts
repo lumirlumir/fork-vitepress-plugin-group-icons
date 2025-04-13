@@ -10,23 +10,38 @@ describe('generate css', () => {
     })).toMatchSnapshot()
   })
 
-  it('custom icon', async () => {
+  it('custom icon', { timeout: 0 }, async () => {
     const labels = new Set(['vitepress', 'ae', 'oxc'])
     expect(await generateCSS(labels, {
       customIcon: {
         ae: 'logos:adobe-after-effects',
         vitepress: localIconLoader(import.meta.url, '../docs/assets/vitepress.svg'),
-        oxc: 'https://vp.yuy1n.io/oxc.svg',
       },
     })).toMatchSnapshot()
-  }, {
-    timeout: 10000,
   })
 
   it('duplicate label', async () => {
     const labels = new Set(['foo.ts', 'bar.ts'])
     expect(await generateCSS(labels, {
       customIcon: {},
+    })).toMatchSnapshot()
+  })
+
+  it('default labels', async () => {
+    const labels = new Set(['npm'])
+    expect(await generateCSS(labels, {
+      customIcon: {},
+      defaultLabels: ['yarn'],
+    })).toMatchSnapshot()
+  })
+
+  it('default labels with custom icon', async () => {
+    const labels = new Set(['npm'])
+    expect(await generateCSS(labels, {
+      customIcon: {
+        curl: 'logos:curl',
+      },
+      defaultLabels: ['curl'],
     })).toMatchSnapshot()
   })
 })

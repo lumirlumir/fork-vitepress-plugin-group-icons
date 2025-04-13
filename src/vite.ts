@@ -5,6 +5,7 @@ import { isSetEqual } from './utils'
 
 export interface Options {
   customIcon: Record<string, string>
+  defaultLabels?: string[]
 }
 
 const filter = createFilter(
