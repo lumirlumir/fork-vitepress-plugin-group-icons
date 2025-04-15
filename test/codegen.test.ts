@@ -1,4 +1,4 @@
-import { localIconLoader } from 'src'
+import { builtinIcons, localIconLoader } from 'src'
 import { generateCSS } from 'src/codegen'
 import { describe, expect, it } from 'vitest'
 
@@ -42,6 +42,13 @@ describe('generate css', () => {
         curl: 'logos:curl',
       },
       defaultLabels: ['curl'],
+    })).toMatchSnapshot()
+  })
+
+  it('default labels with all builtin icons', async () => {
+    const labels = new Set([])
+    expect(await generateCSS(labels, {
+      defaultLabels: Object.keys(builtinIcons),
     })).toMatchSnapshot()
   })
 })
