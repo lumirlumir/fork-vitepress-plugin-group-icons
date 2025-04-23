@@ -16,11 +16,11 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.mjs"
+      "import": "./dist/index.js"
     }
   },
-  "main": "./dist/index.mjs",
-  "module": "./dist/index.mjs",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "typesVersions": {
     "*": {
@@ -34,8 +34,8 @@
     "dist"
   ],
   "scripts": {
-    "build": "unbuild",
-    "dev": "unbuild --watch",
+    "build": "tsdown",
+    "dev": "tsdown --watch",
     "lint": "eslint .",
     "prepublishOnly": "nr build",
     "release": "bumpp && npm publish",
@@ -62,8 +62,8 @@
     "esno": "^4.8.0",
     "lint-staged": "^15.5.0",
     "simple-git-hooks": "^2.12.1",
+    "tsdown": "^0.9.5",
     "typescript": "^5.8.3",
-    "unbuild": "3.0.0-rc.11",
     "vite": "^6.1.4",
     "vitepress": "^1.6.3",
     "vitest": "^3.1.1"
