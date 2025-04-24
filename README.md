@@ -16,6 +16,13 @@
 </a>
 </p>
 
+<p align='center'>
+<a href="https://stackblitz.com/edit/vitepress-plugin-group-icons?file=docs%2Findex.md">
+<img src="https://developer.stackblitz.com/img/open_in_stackblitz.svg">
+</a>
+</p>
+
+
 ## Usage
 
 ### Install
