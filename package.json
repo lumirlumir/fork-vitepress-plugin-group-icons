@@ -47,6 +47,10 @@
     "docs:build": "vitepress build docs",
     "docs:preview": "vitepress preview docs"
   },
+  "peerDependencies": {
+    "markdown-it": ">=14",
+    "vite": ">=3"
+  },
   "dependencies": {
     "@iconify-json/logos": "^1.2.4",
     "@iconify-json/vscode-icons": "^1.2.18",
