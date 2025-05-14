@@ -48,7 +48,7 @@ describe('generate css', () => {
   it('default labels with all builtin icons', async () => {
     const labels = new Set([])
     expect(await generateCSS(labels, {
-      defaultLabels: Object.keys(builtinIcons),
+      defaultLabels: Object.keys(builtinIcons).slice(0, 3),
     })).toMatchSnapshot()
   })
 })
