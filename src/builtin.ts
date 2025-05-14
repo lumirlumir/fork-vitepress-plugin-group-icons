@@ -36,6 +36,7 @@ export const builtinIcons = {
   'uno.config': 'vscode-icons:file-type-unocss',
   'unocss.config': 'vscode-icons:file-type-unocss',
   '.oxlintrc': 'vscode-icons:file-type-oxlint',
+  'vue.config': 'vscode-icons:file-type-vueconfig',
   // filename extensions
   '.mts': 'vscode-icons:file-type-typescript',
   '.cts': 'vscode-icons:file-type-typescript',
