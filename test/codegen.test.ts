@@ -51,4 +51,13 @@ describe('generate css', () => {
       defaultLabels: Object.keys(builtinIcons).slice(0, 3),
     })).toMatchSnapshot()
   })
+
+  it('empty icon', async () => {
+    const labels = new Set(['reactive'])
+    expect(await generateCSS(labels, {
+      customIcon: {
+        reactive: '',
+      },
+    })).toMatchSnapshot()
+  })
 })
