@@ -48,8 +48,12 @@
     "docs:preview": "vitepress preview docs"
   },
   "peerDependencies": {
-    "markdown-it": ">=14",
     "vite": ">=3"
+  },
+  "peerDependenciesMeta": {
+    "vite": {
+      "optional": true
+    }
   },
   "dependencies": {
     "@iconify-json/logos": "^1.2.9",
