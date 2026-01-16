@@ -1,7 +1,7 @@
 {
   "name": "vitepress-plugin-group-icons",
   "type": "module",
-  "version": "1.6.5",
+  "version": "1.6.6",
   "packageManager": "pnpm@10.18.3",
   "author": "Leo <https://github.com/yuyinws>",
   "license": "MIT",
