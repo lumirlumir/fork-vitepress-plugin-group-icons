@@ -1,6 +1,6 @@
-import { builtinIcons, localIconLoader } from 'src'
-import { generateCSS } from 'src/codegen'
 import { describe, expect, it } from 'vitest'
+import { builtinIcons, localIconLoader } from '../src'
+import { generateCSS } from '../src/codegen'
 
 describe('generate css', () => {
   it('builtin icon', async () => {

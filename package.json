@@ -2,7 +2,7 @@
   "name": "vitepress-plugin-group-icons",
   "type": "module",
   "version": "1.6.7",
-  "packageManager": "pnpm@10.18.3",
+  "packageManager": "pnpm@10.28.0",
   "author": "Leo <https://github.com/yuyinws>",
   "license": "MIT",
   "homepage": "https://github.com/yuyinws/vitepress-plugin-group-icons#readme",
@@ -37,9 +37,7 @@
     "build": "tsdown",
     "dev": "tsdown --watch",
     "lint": "eslint .",
-    "prepublishOnly": "nr build",
     "release": "bumpp",
-    "start": "esno src/index.ts",
     "test": "vitest",
     "typecheck": "tsc --noEmit",
     "prepare": "simple-git-hooks",
@@ -56,25 +54,25 @@
     }
   },
   "dependencies": {
-    "@iconify-json/logos": "^1.2.9",
+    "@iconify-json/logos": "^1.2.10",
     "@iconify-json/vscode-icons": "^1.2.39",
-    "@iconify/utils": "^3.0.2"
+    "@iconify/utils": "^3.1.0"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^6.0.0",
-    "@antfu/ni": "^26.1.0",
+    "@antfu/eslint-config": "^7.0.1",
+    "@antfu/ni": "^28.2.0",
     "@types/markdown-it": "^14.1.2",
-    "@types/node": "^22.18.10",
-    "bumpp": "^10.3.1",
-    "eslint": "^9.37.0",
+    "@types/node": "^22.19.7",
+    "bumpp": "^10.4.0",
+    "eslint": "^9.39.2",
     "esno": "^4.8.0",
-    "lint-staged": "^16.2.4",
+    "lint-staged": "^16.2.7",
     "simple-git-hooks": "^2.13.1",
-    "tsdown": "^0.15.7",
+    "tsdown": "^0.19.0",
     "typescript": "^5.9.3",
-    "vite": "^7.1.10",
+    "vite": "^7.3.1",
     "vitepress": "^1.6.4",
-    "vitest": "^3.2.4"
+    "vitest": "^4.0.17"
   },
   "simple-git-hooks": {
     "pre-commit": "pnpm lint-staged"
