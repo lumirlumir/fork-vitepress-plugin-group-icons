@@ -39,6 +39,7 @@
     "lint": "eslint .",
     "release": "bumpp",
     "test": "vitest",
+    "prepublishOnly": "pnpm build",
     "typecheck": "tsc --noEmit",
     "prepare": "simple-git-hooks",
     "docs:dev": "vitepress dev docs",
