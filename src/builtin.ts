@@ -15,6 +15,8 @@ export const builtinIcons: Icon = {
   'svelte': 'vscode-icons:file-type-svelte',
   'angular': 'vscode-icons:file-type-angular',
   'react': 'vscode-icons:file-type-reactjs',
+  'solid': 'logos:solidjs-icon',
+  'marko': 'vscode-icons:file-type-marko',
   'next': {
     dark: 'vscode-icons:file-type-next',
     light: 'vscode-icons:file-type-light-next',
