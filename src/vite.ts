@@ -3,6 +3,15 @@ import type { Options } from './types'
 import { generateCSS } from './codegen'
 import { isSetEqual } from './utils'
 
+function decodeHtmlEntities(value: string) {
+  return value
+    .replaceAll(/&(?:lt|#60);/g, '<')
+    .replaceAll(/&(?:gt|#62);/g, '>')
+    .replaceAll(/&(?:quot|#34);/g, '"')
+    .replaceAll(/&(?:apos|#39);/g, '\'')
+    .replaceAll(/&(?:amp|#38);/g, '&')
+}
+
 export function groupIconVitePlugin(options?: Options): Plugin {
   const virtualCssId = 'virtual:group-icons.css'
   const resolvedVirtualCssId = `\0${virtualCssId}`
@@ -50,12 +59,14 @@ export function groupIconVitePlugin(options?: Options): Plugin {
         id: /\.(md|md\?vue|md\?v=)$/,
       },
       handler(code) {
+        combinedRegex.lastIndex = 0
+
         while (true) {
           const match = combinedRegex.exec(code)
           if (!match)
             break
 
-          matches.add(match[1] || match[2] || match[3])
+          matches.add(decodeHtmlEntities(match[1] || match[2] || match[3]))
         }
 
         if (!isSetEqual(matches, oldMatches)) {
