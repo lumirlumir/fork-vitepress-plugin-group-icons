@@ -16,7 +16,7 @@ function decodeHtmlEntities(value: string) {
     .replaceAll(HTML_ENTITY_LT_RE, '<')
     .replaceAll(HTML_ENTITY_GT_RE, '>')
     .replaceAll(HTML_ENTITY_QUOT_RE, '"')
-    .replaceAll(HTML_ENTITY_APOS_RE, '\'')
+    .replaceAll(HTML_ENTITY_APOS_RE, "'")
     .replaceAll(HTML_ENTITY_AMP_RE, '&')
 }
 
@@ -34,7 +34,7 @@ export function groupIconVitePlugin(options?: Options): Plugin {
     const mod = server?.moduleGraph.getModuleById(resolvedVirtualCssId)
     if (mod) {
       server!.moduleGraph.invalidateModule(mod)
-      server!.reloadModule(mod)
+      void server!.reloadModule(mod)
     }
   }
 
@@ -70,8 +70,7 @@ export function groupIconVitePlugin(options?: Options): Plugin {
 
         while (true) {
           const match = DATA_TITLE_RE.exec(code)
-          if (!match)
-            break
+          if (!match) break
 
           matches.add(decodeHtmlEntities(match[1] || match[2] || match[3]))
         }
