@@ -1,6 +1,10 @@
 import type Markdown from 'markdown-it'
 import { namedIconMatchRegex } from './utils'
 
+const LABEL_RE = /<label\b(?![^>]+\bdata-title\b)[^>]*>(.*?)<\/label>/g
+const NAMED_ICON_LABEL_RE = /(<label[^>]*>)(.*?)(~[^~]+~)(.*?)(<\/label>)/g
+const TITLE_RE = /\[((?:[^[\]]|\[[^[\]]*\])*)\]/
+
 interface MdPluginOptions {
   titleBar: {
     /**
@@ -16,12 +20,11 @@ export function groupIconMdPlugin(md: Markdown, options?: MdPluginOptions) {
   const _options = options || { titleBar: { includeSnippet: false } }
 
   // code group rule
-  const labelRE = /<label\b(?![^>]+\bdata-title\b)[^>]*>(.*?)<\/label>/g
   const codeGroupOpenRule = md.renderer.rules['container_code-group_open']
   if (codeGroupOpenRule) {
     md.renderer.rules['container_code-group_open'] = (...args) => {
       return codeGroupOpenRule(...args).replace(
-        labelRE,
+        LABEL_RE,
         (match: string, label: string) =>
           `<label data-title="${md.utils.escapeHtml(label)}"${match.slice(6)}`,
       )
@@ -29,11 +32,10 @@ export function groupIconMdPlugin(md: Markdown, options?: MdPluginOptions) {
   }
 
   // replace named icon in label content
-  const namedIconLabelMatchRegex = /(<label[^>]*>)(.*?)(~[^~]+~)(.*?)(<\/label>)/g
   md.renderer.rules['container_code-group_open']! = (...args) => {
     const code = codeGroupOpenRule!(...args)
     return code.replace(
-      namedIconLabelMatchRegex,
+      NAMED_ICON_LABEL_RE,
       (_, labelStart, beforeIcon, _icon, afterIcon, labelEnd) => {
         return `${labelStart}${beforeIcon.trim()}${afterIcon}${labelEnd}`
       },
@@ -58,7 +60,7 @@ export function groupIconMdPlugin(md: Markdown, options?: MdPluginOptions) {
           break
         }
       }
-      const title = token.info.match(/\[((?:[^[\]]|\[[^[\]]*\])*)\]/)
+      const title = token.info.match(TITLE_RE)
 
       const isIncludedSnippet = _options.titleBar.includeSnippet
 

@@ -4,6 +4,8 @@ import { encodeSvgForCss, getIconData, iconToHTML, iconToSVG } from '@iconify/ut
 import { builtinIcons } from './builtin'
 import { namedIconMatchRegex } from './utils'
 
+const HTTP_URL_RE = /^https?:\/\//
+
 export async function generateCSS(labels: Set<string>, options: Options) {
   const baseCSS = `
 .vp-code-block-title [data-title]::before,
@@ -167,7 +169,7 @@ async function getSVG(icon: string) {
     return encodeSvgForCss(icon)
   }
 
-  if (/^https?:\/\//.test(icon)) {
+  if (HTTP_URL_RE.test(icon)) {
     try {
       const raw = await fetch(icon)
       const iconContent = await raw.text()

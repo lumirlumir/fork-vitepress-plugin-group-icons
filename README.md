@@ -6,7 +6,7 @@
 
 > Enhance code blocks features for VitePress.
 
-![vp-plugin-group-icons](https://static.yuy1n.io/vp-plugin-group-icons.png)
+![vitepress-plugin-group-icons preview](https://static.yuy1n.io/vp-plugin-group-icons.png)
 
 <p align='center'>
 <a href="https://vp.yuy1n.io/">
@@ -16,7 +16,7 @@
 
 <p align='center'>
 <a href="https://stackblitz.com/edit/vitepress-plugin-group-icons?file=docs%2Findex.md">
-<img src="https://developer.stackblitz.com/img/open_in_stackblitz.svg">
+<img src="https://developer.stackblitz.com/img/open_in_stackblitz.svg" alt="Open in StackBlitz">
 </a>
 </p>
 

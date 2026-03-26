@@ -21,3 +21,12 @@ Docker
 ```ts [users/[id]/index.ts]
 // users/[id]/index.ts
 ```
+
+```ts [index.ts ->]
+test
+```
+
+
+```ts [index.ts -<]
+test
+```

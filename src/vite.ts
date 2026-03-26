@@ -3,22 +3,29 @@ import type { Options } from './types'
 import { generateCSS } from './codegen'
 import { isSetEqual } from './utils'
 
+const HTML_ENTITY_LT_RE = /&(?:lt|#60);/g
+const HTML_ENTITY_GT_RE = /&(?:gt|#62);/g
+const HTML_ENTITY_QUOT_RE = /&(?:quot|#34);/g
+const HTML_ENTITY_APOS_RE = /&(?:apos|#39);/g
+const HTML_ENTITY_AMP_RE = /&(?:amp|#38);/g
+const DATA_TITLE_RE = /\bdata-title=\\"([^"]*)\\"|\bdata-title="([^"]*)"|"data-title":\s*"([^"]*)"/g
+const MARKDOWN_ID_RE = /\.(md|md\?vue|md\?v=)$/
+
 function decodeHtmlEntities(value: string) {
   return value
-    .replaceAll(/&(?:lt|#60);/g, '<')
-    .replaceAll(/&(?:gt|#62);/g, '>')
-    .replaceAll(/&(?:quot|#34);/g, '"')
-    .replaceAll(/&(?:apos|#39);/g, '\'')
-    .replaceAll(/&(?:amp|#38);/g, '&')
+    .replaceAll(HTML_ENTITY_LT_RE, '<')
+    .replaceAll(HTML_ENTITY_GT_RE, '>')
+    .replaceAll(HTML_ENTITY_QUOT_RE, '"')
+    .replaceAll(HTML_ENTITY_APOS_RE, '\'')
+    .replaceAll(HTML_ENTITY_AMP_RE, '&')
 }
 
 export function groupIconVitePlugin(options?: Options): Plugin {
   const virtualCssId = 'virtual:group-icons.css'
   const resolvedVirtualCssId = `\0${virtualCssId}`
-  const combinedRegex = /\bdata-title=\\"([^"]*)\\"|\bdata-title="([^"]*)"|"data-title":\s*"([^"]*)"/g
   const matches = new Set<string>()
 
-  let oldMatches: Set<string>
+  let oldMatches = new Set<string>()
   let server: ViteDevServer | undefined
 
   options = options || { customIcon: {} }
@@ -56,13 +63,13 @@ export function groupIconVitePlugin(options?: Options): Plugin {
     },
     transform: {
       filter: {
-        id: /\.(md|md\?vue|md\?v=)$/,
+        id: MARKDOWN_ID_RE,
       },
       handler(code) {
-        combinedRegex.lastIndex = 0
+        DATA_TITLE_RE.lastIndex = 0
 
         while (true) {
-          const match = combinedRegex.exec(code)
+          const match = DATA_TITLE_RE.exec(code)
           if (!match)
             break
 
