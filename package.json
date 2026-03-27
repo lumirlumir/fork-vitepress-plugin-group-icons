@@ -1,7 +1,10 @@
 {
   "name": "vitepress-plugin-group-icons",
   "version": "1.7.3",
-  "keywords": [],
+  "keywords": [
+    "vitepress",
+    "vitepress-plugin"
+  ],
   "homepage": "https://github.com/yuyinws/vitepress-plugin-group-icons#readme",
   "bugs": "https://github.com/yuyinws/vitepress-plugin-group-icons/issues",
   "license": "MIT",
