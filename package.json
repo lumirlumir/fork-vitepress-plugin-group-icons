@@ -33,7 +33,7 @@
     }
   },
   "scripts": {
-    "build": "tsdown --deps.neverBundle markdown-it",
+    "build": "vp pack",
     "dev": "pnpm build --watch",
     "lint:fix": "vp lint --fix && vp fmt",
     "lint": "vp lint",
@@ -54,12 +54,10 @@
     "@types/markdown-it": "^14.1.2",
     "@types/node": "^25.5.0",
     "bumpp": "^11.0.1",
-    "tsdown": "^0.21.5",
     "typescript": "^6.0.2",
     "vite": "^8.0.2",
     "vite-plus": "^0.1.14",
-    "vitepress": "^1.6.4",
-    "vitest": "^4.1.1"
+    "vitepress": "^1.6.4"
   },
   "peerDependencies": {
     "vite": ">=3"

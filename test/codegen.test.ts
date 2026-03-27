@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest'
+import { describe, expect, it } from 'vite-plus/test'
 import { builtinIcons, localIconLoader } from '../src'
 import { generateCSS } from '../src/codegen'
 
