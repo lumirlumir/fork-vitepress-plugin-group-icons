@@ -1,7 +1,7 @@
 import type { Icon, IconValue, Options } from './types'
 import { createRequire } from 'node:module'
 import { encodeSvgForCss, getIconData, iconToHTML, iconToSVG } from '@iconify/utils'
-import { builtinIcons } from './builtin'
+import { builtinExtensionIcons, builtinIcons } from './builtin'
 import { namedIconMatchRegex } from './utils'
 
 const HTTP_URL_RE = /^https?:\/\//
@@ -57,9 +57,16 @@ export async function generateCSS(labels: Set<string>, options: Options) {
 `
 
   const mergedIcons: Icon = { ...builtinIcons, ...options.customIcon }
+  const mergedExtensionIcons: Icon | undefined = options.enableExtensionIcons
+    ? {
+        ...builtinExtensionIcons,
+        ...options.customExtensionIcon,
+      }
+    : undefined
   const matched = getMatchedLabels(
     new Set([...labels, ...(options.defaultLabels || [])]),
     mergedIcons,
+    mergedExtensionIcons,
   )
 
   const css = baseCSS + (await generateIconCSS(matched))
@@ -76,9 +83,16 @@ function iconKey(icon: IconValue) {
   return typeof icon === 'string' ? `s:${icon}` : `o:${JSON.stringify(icon)}`
 }
 
-function getMatchedLabels(labels: Set<string>, icons: Icon): MatchedIcon[] {
+export function getMatchedLabels(
+  labels: Set<string>,
+  icons: Icon,
+  extensionIcons: Icon | undefined,
+): MatchedIcon[] {
   const matched = new Map<string, MatchedIcon>()
   const sortedKeys = Object.keys(icons).sort((a, b) => b.length - a.length)
+  const sortedExtensionKeys = extensionIcons
+    ? Object.keys(extensionIcons).sort((a, b) => b.length - a.length)
+    : []
 
   const add = (icon: IconValue, label: string) => {
     const key = iconKey(icon)
@@ -99,6 +113,11 @@ function getMatchedLabels(labels: Set<string>, icons: Icon): MatchedIcon[] {
       const key = sortedKeys.find(k => label?.toLowerCase().includes(k))
       if (key) {
         add(icons[key], label)
+      } else if (extensionIcons) {
+        const extensionKey = sortedExtensionKeys.find(k => label?.toLowerCase().endsWith(k))
+        if (extensionKey) {
+          add(extensionIcons[extensionKey], label)
+        }
       }
     }
   }
