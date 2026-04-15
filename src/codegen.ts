@@ -1,7 +1,7 @@
 import type { Icon, IconValue, Options } from './types'
 import { createRequire } from 'node:module'
 import { encodeSvgForCss, getIconData, iconToHTML, iconToSVG } from '@iconify/utils'
-import { builtinExtensionIcons, builtinIcons } from './builtin'
+import { builtinIcons } from './builtin'
 import { namedIconMatchRegex } from './utils'
 
 const HTTP_URL_RE = /^https?:\/\//
@@ -56,17 +56,13 @@ export async function generateCSS(labels: Set<string>, options: Options) {
 }
 `
 
-  const mergedIcons: Icon = { ...builtinIcons, ...options.customIcon }
-  const mergedExtensionIcons: Icon | undefined = options.enableExtensionIcons
-    ? {
-        ...builtinExtensionIcons,
-        ...options.customExtensionIcon,
-      }
-    : undefined
+  const mergedIcons: Icon = {
+    ...builtinIcons,
+    ...options.customIcon,
+  }
   const matched = getMatchedLabels(
     new Set([...labels, ...(options.defaultLabels || [])]),
     mergedIcons,
-    mergedExtensionIcons,
   )
 
   const css = baseCSS + (await generateIconCSS(matched))
@@ -83,16 +79,11 @@ function iconKey(icon: IconValue) {
   return typeof icon === 'string' ? `s:${icon}` : `o:${JSON.stringify(icon)}`
 }
 
-export function getMatchedLabels(
-  labels: Set<string>,
-  icons: Icon,
-  extensionIcons: Icon | undefined,
-): MatchedIcon[] {
+export function getMatchedLabels(labels: Set<string>, icons: Icon): MatchedIcon[] {
   const matched = new Map<string, MatchedIcon>()
-  const sortedKeys = Object.keys(icons).sort((a, b) => b.length - a.length)
-  const sortedExtensionKeys = extensionIcons
-    ? Object.keys(extensionIcons).sort((a, b) => b.length - a.length)
-    : []
+  const sortedEntries = Object.entries(icons).sort(([a], [b]) => b.length - a.length)
+  const keywordEntries = sortedEntries.filter(([label]) => !label.includes('.'))
+  const extensionEntries = sortedEntries.filter(([label]) => label.includes('.'))
 
   const add = (icon: IconValue, label: string) => {
     const key = iconKey(icon)
@@ -110,14 +101,20 @@ export function getMatchedLabels(
       const [_, namedIcon] = namedIconMatch
       add(namedIcon, label)
     } else {
-      const key = sortedKeys.find(k => label?.toLowerCase().includes(k))
-      if (key) {
-        add(icons[key], label)
-      } else if (extensionIcons) {
-        const extensionKey = sortedExtensionKeys.find(k => label?.toLowerCase().endsWith(k))
-        if (extensionKey) {
-          add(extensionIcons[extensionKey], label)
-        }
+      const lowerCaseLabel = label.toLowerCase()
+      const keywordMatch = keywordEntries.find(([keyword]) => lowerCaseLabel.includes(keyword))
+
+      if (keywordMatch) {
+        add(keywordMatch[1], label)
+        continue
+      }
+
+      const extensionMatch = extensionEntries.find(([extension]) =>
+        lowerCaseLabel.endsWith(extension),
+      )
+
+      if (extensionMatch) {
+        add(extensionMatch[1], label)
       }
     }
   }

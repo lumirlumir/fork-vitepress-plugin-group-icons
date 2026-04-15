@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vite-plus/test'
-import { builtinExtensionIcons, builtinIcons, localIconLoader } from '../src'
+import { builtinIcons, localIconLoader } from '../src'
 import { generateCSS, getMatchedLabels } from '../src/codegen'
 
 describe('generate css', () => {
@@ -62,10 +62,9 @@ describe('generate css', () => {
 
   it('default labels with all builtin icons', async () => {
     const labels = new Set([])
-    const allBuiltinKeys = [...Object.keys(builtinIcons), ...Object.keys(builtinExtensionIcons)]
     expect(
       await generateCSS(labels, {
-        defaultLabels: allBuiltinKeys.slice(0, 3),
+        defaultLabels: Object.keys(builtinIcons).slice(0, 3),
       }),
     ).toMatchSnapshot()
   })
@@ -99,9 +98,10 @@ describe('generate css', () => {
       'script.py',
       '.vscode/123456',
       'vite.config.ts',
+      'eslint.config.ts',
     ])
 
-    const matched = getMatchedLabels(labels, builtinIcons, builtinExtensionIcons)
+    const matched = getMatchedLabels(labels, builtinIcons)
     const matchedLabels = matched.flatMap(m => m.labels)
 
     expect(matchedLabels).toContain('test.c')
@@ -112,30 +112,29 @@ describe('generate css', () => {
     expect(matchedLabels).toContain('.vscode/123456')
 
     const cMatch = matched.find(m => m.labels.includes('test.c'))
-    expect(cMatch).toBeDefined()
-    expect(cMatch?.icon).toBe('vscode-icons:file-type-c')
+    expect(cMatch?.icon).toMatchInlineSnapshot(`"vscode-icons:file-type-c"`)
 
     const cssMatch = matched.find(m => m.labels.includes('test.css'))
-    expect(cssMatch).toBeDefined()
-    expect(cssMatch?.icon).toBe('vscode-icons:file-type-css')
+    expect(cssMatch?.icon).toMatchInlineSnapshot(`"vscode-icons:file-type-css"`)
 
     const tsMatch = matched.find(m => m.labels.includes('file.ts'))
-    expect(tsMatch).toBeDefined()
-    expect(tsMatch?.icon).toBe('vscode-icons:file-type-typescript')
+    expect(tsMatch?.icon).toMatchInlineSnapshot(`"vscode-icons:file-type-typescript"`)
 
     const pyMatch = matched.find(m => m.labels.includes('script.py'))
-    expect(pyMatch).toBeDefined()
-    expect(pyMatch?.icon).toBe('vscode-icons:file-type-python')
+    expect(pyMatch?.icon).toMatchInlineSnapshot(`"vscode-icons:file-type-python"`)
 
     const vscodeMatch = matched.find(m => m.labels.includes('.vscode/123456'))
-    expect(vscodeMatch).toBeDefined()
-    expect(vscodeMatch?.icon).toBe('vscode-icons:file-type-vscode')
+    expect(vscodeMatch?.icon).toMatchInlineSnapshot(`"vscode-icons:file-type-vscode"`)
 
     const viteMatch = matched.find(m => m.labels.includes('vite.config.ts'))
-    expect(viteMatch).toBeDefined()
-    expect(viteMatch?.icon).toStrictEqual({
-      dark: 'vscode-icons:file-type-vite',
-      light: 'vscode-icons:file-type-light-vite',
-    })
+    expect(viteMatch?.icon).toMatchInlineSnapshot(`
+    	{
+    	  "dark": "vscode-icons:file-type-vite",
+    	  "light": "vscode-icons:file-type-light-vite",
+    	}
+    `)
+
+    const eslintMatch = matched.find(m => m.labels.includes('eslint.config.ts'))
+    expect(eslintMatch?.icon).toMatchInlineSnapshot(`"vscode-icons:file-type-eslint"`)
   })
 })

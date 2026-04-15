@@ -22,11 +22,7 @@ Docker
 // users/[id]/index.ts
 ```
 
-```ts [index.ts ->]
+```ts [index.ts -> export default -> enhanceApp() ~vscode-icons:file-type-typescript~]
 test
 ```
 
-
-```ts [index.ts -<]
-test
-```

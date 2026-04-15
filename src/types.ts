@@ -9,7 +9,5 @@ export type Icon = Record<string, IconValue>
 
 export interface Options {
   customIcon?: Icon
-  enableExtensionIcons?: boolean
-  customExtensionIcon?: Icon
   defaultLabels?: string[]
 }
