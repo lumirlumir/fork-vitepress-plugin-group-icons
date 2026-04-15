@@ -17,7 +17,7 @@ export default defineConfig({
     singleQuote: true,
     arrowParens: 'avoid',
     quoteProps: 'consistent',
-    endOfLine: 'crlf',
+    endOfLine: 'lf',
   },
   pack: {
     deps: {
