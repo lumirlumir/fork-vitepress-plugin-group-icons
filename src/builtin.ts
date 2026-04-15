@@ -86,6 +86,7 @@ const keywordMatchIcons = {
 // Keys without `.` are treated as keyword matches in `getMatchedLabels`.
 const extensionMatchIcons = {
   'package.json': 'vscode-icons:file-type-node',
+  'uno.config.ts': 'vscode-icons:file-type-unocss',
   '.sass': 'vscode-icons:file-type-sass',
   '.less': 'vscode-icons:file-type-less',
   '.toml': {
